@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ede4cc;
+  }
+  #buttons {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+  }
+  
+  button {
+    border: none;
+    background-color: #d4a285;
+    text-align: center;
+    display: inline-block;
+    margin: 2px;
+    padding: 5px;
+    border-radius: 2px;
+  }
+  
