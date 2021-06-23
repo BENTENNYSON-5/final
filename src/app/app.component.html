@@ -14,6 +14,7 @@
       <button id="Rectangle" (click)= "rectanglefunc()">Rectangle</button>
       <button id="Triangle" (click)= "trianglefunc()">Triangle</button>
       <button id="Arrow" (click)= "arrowfunc()">Arrow</button>
+      <button id="Tick" (click)="tickfunc()">Tick</button>
       <button id="Draw" (click)= "drawfunc()">Draw</button>
       <button id="Text" (click)= "textfunc()">Text</button>
        <input onInput="colour = this.value" type="color" class="color-picker">
@@ -26,8 +27,8 @@
       <button id='Undo' (click)= "undofunc()">Undo</button>
     </div>
     <div id="Image">
-
       <input type="file" id="file_input">
+      <button id="save" (click)= "downloadfunc()">Download</button>
     </div>
   </div>
   <script>
