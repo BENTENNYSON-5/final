@@ -82,13 +82,13 @@ export class ShapeService {
       stroke: 'black',
       strokeWidth: 5
     });
-    /*this.getSelfRect = function () {
-      return {
-        x: 15,
-        y: 60,
-        width: 45,
-        height: 30
-      };
-    };*/
+    // this.getSelfRect = function () {
+    //   return {
+    //     x: 15,
+    //     y: 60,
+    //     width: 45,
+    //     height: 30
+    //   };
+    // };*/
   }
 }

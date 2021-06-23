@@ -26,7 +26,9 @@ export class AppComponent {
     this.layer = new Konva.Layer();
     this.stage.add(this.layer);
   }
-shapes : any = [];
+
+
+  shapes : any = [];
   check_draw = false;
   not_draw(){
     this.check_draw = false;
@@ -34,6 +36,13 @@ shapes : any = [];
     this.stage.off("mouseup touchend");
     this.stage.off("mousemove touchmove");
   }
+
+stagefunc(){
+    console.log("hi");
+}
+
+
+
 circlefunc(){
   console.log("circle");
   this.not_draw();
@@ -43,6 +52,9 @@ circlefunc(){
   this.stage.add(this.layer);
   this.addTransformerListeners()
 }
+
+
+
 rectanglefunc(){
   console.log("rectangle");
   this.not_draw();
@@ -52,6 +64,9 @@ rectanglefunc(){
     this.stage.add(this.layer);
     this.addTransformerListeners()
 }
+
+
+
 trianglefunc(){
   console.log("triangle");
   this.not_draw();
@@ -61,6 +76,9 @@ trianglefunc(){
   this.stage.add(this.layer);
   this.addTransformerListeners()
 }
+
+
+
 arrowfunc(){
   console.log("arrow");
   this.not_draw();
@@ -70,6 +88,9 @@ arrowfunc(){
   this.stage.add(this.layer);
   this.addTransformerListeners()
 }
+
+
+
 tickfunc(){
   console.log("tick");
   this.not_draw();
@@ -79,26 +100,94 @@ tickfunc(){
   this.stage.add(this.layer);
   this.addTransformerListeners()
 }
+
+
+
 drawfunc(){
   console.log("draw");
 }
+
+
+
 textfunc(){
   console.log("text");
 }
+
+
+
 cleanfunc(){
-  console.log("clean");
+  this.not_draw();
+  for (var i = 0; i < this.shapes.length; i++) {
+    if (this.shapes[i]["attrs"].type !== "Image") {
+      // reshape.detach();
+      this.shapes[i].destroy();
+      this.shapes.splice(i, 1);
+      i--;
+    }
+  }
+  console.log('clean',this.shapes);
 }
+
+
+
 cleanshapesfunc(){
-  console.log("cleanshapes");
+  this.not_draw();
+  for (var i = 0; i < this.shapes.length; i++) {
+    if (
+      this.shapes[i]["attrs"].type !== "Image" &&
+      this.shapes[i]["attrs"].type !== "Text" &&
+      this.shapes[i]["attrs"].type !== "Draw"
+    ) {
+      // reshape.detach();
+      this.shapes[i].destroy();
+      this.shapes.splice(i, 1);
+      i--;
+    }
+  }
+  console.log('cleanshape',this.shapes);
 }
+
+
+
 cleancirclefunc(){
-  console.log("cleancircle");
+  this.not_draw();
+  for (var i = 0; i < this.shapes.length; i++) {
+    if (this.shapes[i]["attrs"].type === "Circle") {
+      // reshape.detach();
+      this.shapes[i].destroy();
+      this.shapes.splice(i, 1);
+      i--;
+    }
+  }
+  console.log('cleancircle',this.shapes);
 }
+
+
 cleanrectanglefunc(){
-  console.log("cleanrectangle");
+  this.not_draw();
+  for (var i = 0; i < this.shapes.length; i++) {
+    if (this.shapes[i]["attrs"].type === "Rectangle") {
+      // reshape.detach();
+      this.shapes[i].destroy();
+      this.shapes.splice(i, 1);
+      i--;
+    }
+  }
+  console.log('cleanrectangle',this.shapes);
 }
+
+
 undofunc(){
-  console.log("undo");
+  this.not_draw();
+  var i = this.shapes.length - 1;
+  if (i >= 0) {
+    if (this.shapes[i]["attrs"].type !== "Image") {
+      // reshape.detach();
+      this.shapes[i].destroy();
+      this.shapes.splice(i, 1);
+    }
+  }
+  console.log('undo',this.shapes);
 }
 downloadfunc(){
   console.log("Downloaded")
@@ -113,36 +202,36 @@ downloadfunc(){
   delete link;
 }*/
 addTransformerListeners() {
-  const component = this;
-  const tr = new Konva.Transformer();
-  this.stage.on('click', function (e: any) {
-    if (e.target._id) {
-      component.addDeleteListener(e.target);
-      component.layer.add(tr);
-      tr.attachTo(e.target);
-      component.transformers.push(tr);
-      component.layer.draw();
-    }
-    else {
-      tr.detach();
-      component.layer.draw();
-    }
-  });
+  // const component = this;
+  // const tr = new Konva.Transformer();
+  // this.stage.on('click', function (e: any) {
+  //   if (e.target._id) {
+  //     component.addDeleteListener(e.target);
+  //     component.layer.add(tr);
+  //     tr.attachTo(e.target);
+  //     component.transformers.push(tr);
+  //     component.layer.draw();
+  //   }
+  //   else {
+  //     tr.detach();
+  //     component.layer.draw();
+  //   }
+  // });
   
 }
-addDeleteListener(shape: any) {
-  const component = this;
-  window.addEventListener('keydown', function (e) {
-    if (e.keyCode === 46) {
-      shape.remove();
-      component.transformers.forEach((t: { detach: () => void; }) => {
-        t.detach();
-      });
-      const selectedShape = component.shapes.find((s: any) => s._id == shape._id);
-      selectedShape.remove();
-      e.preventDefault();
-    }
-    component.layer.batchDraw();
-  });
-}
+// addDeleteListener(shape: any) {
+//   const component = this;
+//   window.addEventListener('keydown', function (e) {
+//     if (e.keyCode === 46) {
+//       shape.remove();
+//       component.transformers.forEach((t: { detach: () => void; }) => {
+//         t.detach();
+//       });
+//       const selectedShape = component.shapes.find((s: any) => s._id == shape._id);
+//       selectedShape.remove();
+//       e.preventDefault();
+//     }
+//     component.layer.batchDraw();
+//   });
+// }
 }
